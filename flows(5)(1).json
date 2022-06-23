@@ -1,0 +1,276 @@
+[
+    {
+        "id": "1e82dec3a967bbf3",
+        "type": "tab",
+        "label": "Flow 4",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "83d5abb9850b48c3",
+        "type": "mqtt in",
+        "z": "1e82dec3a967bbf3",
+        "name": "",
+        "topic": "codigoIoT/g9/mosquitto/msg",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "b19cfbfb792f6aa6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 160,
+        "y": 160,
+        "wires": [
+            [
+                "99d2a56c372cb75e",
+                "584474c57b38c585"
+            ]
+        ]
+    },
+    {
+        "id": "99d2a56c372cb75e",
+        "type": "json",
+        "z": "1e82dec3a967bbf3",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 410,
+        "y": 160,
+        "wires": [
+            [
+                "f43b343da88e39f5",
+                "101bb8ed629a2150"
+            ]
+        ]
+    },
+    {
+        "id": "f43b343da88e39f5",
+        "type": "debug",
+        "z": "1e82dec3a967bbf3",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 590,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "101bb8ed629a2150",
+        "type": "function",
+        "z": "1e82dec3a967bbf3",
+        "name": "",
+        "func": "msg.topic = msg.payload.id;\nmsg.payload = msg.payload.temp;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 600,
+        "y": 160,
+        "wires": [
+            [
+                "90957cded71941e6",
+                "fb276cfc2299ee13"
+            ]
+        ]
+    },
+    {
+        "id": "90957cded71941e6",
+        "type": "ui_chart",
+        "z": "1e82dec3a967bbf3",
+        "name": "",
+        "group": "f59de576828e5bb0",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "label": "Temperatura de los alumnos",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "45",
+        "removeOlder": "20",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 860,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "945ffbac2977baca",
+        "type": "inject",
+        "z": "1e82dec3a967bbf3",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "15",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"id\":\"Distraido\",\"temp\":30}",
+        "payloadType": "str",
+        "x": 110,
+        "y": 380,
+        "wires": [
+            [
+                "859d204b9939f729"
+            ]
+        ]
+    },
+    {
+        "id": "859d204b9939f729",
+        "type": "mqtt out",
+        "z": "1e82dec3a967bbf3",
+        "name": "",
+        "topic": "codigoIoT/g9/mosquitto/msg",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "b19cfbfb792f6aa6",
+        "x": 440,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "584474c57b38c585",
+        "type": "debug",
+        "z": "1e82dec3a967bbf3",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 410,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "fb276cfc2299ee13",
+        "type": "debug",
+        "z": "1e82dec3a967bbf3",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 790,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "166643bbaa722a8f",
+        "type": "comment",
+        "z": "1e82dec3a967bbf3",
+        "name": "Graficador (la parte que recibe)",
+        "info": "",
+        "x": 170,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "547190574f81cf9b",
+        "type": "comment",
+        "z": "1e82dec3a967bbf3",
+        "name": "El automatizador (la parte que envia)",
+        "info": "",
+        "x": 180,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "b19cfbfb792f6aa6",
+        "type": "mqtt-broker",
+        "name": "Broker G9",
+        "broker": "3.123.49.252",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "f59de576828e5bb0",
+        "type": "ui_group",
+        "name": "Grupro grafica",
+        "tab": "6f2ecf24807c1a12",
+        "order": 1,
+        "disp": true,
+        "width": "24",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "6f2ecf24807c1a12",
+        "type": "ui_tab",
+        "name": "Flow4",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
